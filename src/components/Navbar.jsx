@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 function Navbar() {
+  const { user, logOut } = useAuth();
   return (
     <>
       <div className="navbar bg-base-100">
@@ -62,7 +64,11 @@ function Navbar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user && (
+            <button onClick={() => logOut()} className="btn">
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </>
