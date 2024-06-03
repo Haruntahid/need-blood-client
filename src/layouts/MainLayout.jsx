@@ -5,7 +5,9 @@ function MainLayout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="container mx-auto">
+        <Outlet />
+      </div>
     </>
   );
 }

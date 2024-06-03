@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Register() {
   const axiosPublic = useAxiosPublic();
@@ -18,6 +18,28 @@ function Register() {
     formState: { errors },
     watch,
   } = useForm();
+
+  const [districts, setDistricts] = useState([]);
+  const [upazilas, setUpazilas] = useState([]);
+  const selectedDistrict = watch("district");
+
+  useEffect(() => {
+    // Fetch districts data
+    axiosPublic.get("/districts").then((response) => {
+      setDistricts(response.data);
+    });
+  }, [axiosPublic]);
+
+  useEffect(() => {
+    if (selectedDistrict) {
+      // Fetch upazilas data based on the selected district
+      axiosPublic
+        .get(`/upazilas?district_id=${selectedDistrict}`)
+        .then((response) => {
+          setUpazilas(response.data);
+        });
+    }
+  }, [axiosPublic, selectedDistrict]);
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
@@ -172,7 +194,7 @@ function Register() {
               </select>
             </label>
             {errors.bloodGroup && (
-              <p className="text-red-500 mt-1">Blood group is required</p>
+              <p className="text-red-500 mt-2">Blood group is required</p>
             )}
           </div>
 
@@ -180,26 +202,36 @@ function Register() {
           <div className="mt-8">
             <label className="relative block">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <FaDroplet className="w-5 h-5 text-gray-300 dark:text-gray-500" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 text-gray-300 dark:text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
               </span>
               <select
                 {...register("district", {
                   required: true,
-                  validate: (value) => value !== "",
+                  validate: (value) => value !== "DEFAULT",
                 })}
-                defaultValue=""
+                defaultValue="DEFAULT"
                 className="block w-full py-3 pl-10 pr-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               >
-                <option value="" disabled>
+                <option value="DEFAULT" disabled>
                   Select District
                 </option>
-                <option value="District1">District1</option>
-                <option value="District2">District2</option>
-                {/* Add more options as needed */}
+                {districts.map((district) => (
+                  <option key={district._id} value={district.id}>
+                    {district.name}
+                  </option>
+                ))}
               </select>
             </label>
             {errors.district && (
-              <p className="text-red-500 mt-1">District is required</p>
+              <p className="text-red-500 mt-2">District is required</p>
             )}
           </div>
 
@@ -207,26 +239,36 @@ function Register() {
           <div className="mt-8">
             <label className="relative block">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <FaDroplet className="w-5 h-5 text-gray-300 dark:text-gray-500" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 text-gray-300 dark:text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
               </span>
               <select
                 {...register("upazila", {
                   required: true,
-                  validate: (value) => value !== "",
+                  validate: (value) => value !== "DEFAULT",
                 })}
-                defaultValue=""
+                defaultValue="DEFAULT"
                 className="block w-full py-3 pl-10 pr-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               >
-                <option value="" disabled>
+                <option value="DEFAULT" disabled>
                   Select Upazila
                 </option>
-                <option value="Upazila1">Upazila1</option>
-                <option value="Upazila2">Upazila2</option>
-                {/* Add more options as needed */}
+                {upazilas.map((upazila) => (
+                  <option key={upazila._id} value={upazila.name}>
+                    {upazila.name}
+                  </option>
+                ))}
               </select>
             </label>
             {errors.upazila && (
-              <p className="text-red-500 mt-1">Upazila is required</p>
+              <p className="text-red-500 mt-2">Upazila is required</p>
             )}
           </div>
 
@@ -258,9 +300,8 @@ function Register() {
               <p className="text-red-500 mt-1">Valid email is required</p>
             )}
           </div>
-
           {/* Password */}
-          <div className="mt-6">
+          <div className="mt-8">
             <label className="relative block">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg
@@ -274,27 +315,28 @@ function Register() {
                 </svg>
               </span>
               <input
-                {...register("password", { required: true, minLength: 6 })}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                })}
                 type={showPassword ? "text" : "password"}
                 className="block w-full py-3 pl-10 pr-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Password"
               />
-              {password && (
-                <span
-                  className="absolute top-[30%] right-[5%] text-white"
-                  onClick={handleToggle}
-                >
-                  {showPassword ? (
-                    <FaRegEye size={22} />
-                  ) : (
-                    <FaRegEyeSlash size={22} />
-                  )}
-                </span>
-              )}
+              <span
+                onClick={handleToggle}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+              >
+                {showPassword ? (
+                  <FaRegEye className="w-5 h-5 text-gray-300 dark:text-gray-500" />
+                ) : (
+                  <FaRegEyeSlash className="w-5 h-5 text-gray-300 dark:text-gray-500" />
+                )}
+              </span>
             </label>
             {errors.password && (
-              <p className="text-red-500 mt-1">
-                Password must be at least 6 characters long
+              <p className="text-red-500 mt-2">
+                Password is required and should be at least 6 characters long
               </p>
             )}
           </div>
@@ -331,12 +373,14 @@ function Register() {
             )}
           </div>
 
-          <button
-            type="submit"
-            className="w-full px-4 py-2 mt-6 font-medium text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
-          >
-            Register
-          </button>
+          <div className="mt-8">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400"
+            >
+              Register
+            </button>
+          </div>
         </form>
       </div>
     </section>
