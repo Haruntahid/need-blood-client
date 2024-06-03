@@ -5,14 +5,12 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
-// import useAxiosSecure from "../hooks/useAxiosSecure";
 
 function Register() {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  // const axiosSecure = useAxiosSecure();
   const [showPassword, setShowPassword] = useState(false);
-  const { registerUser } = useAuth();
+  const { registerUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
@@ -21,55 +19,56 @@ function Register() {
     watch,
   } = useForm();
 
-  const handelToogle = () => {
+  const handleToggle = () => {
     setShowPassword(!showPassword);
   };
 
-  // image hosting
-  const image_hosting_key = import.meta.env.VITE_Image_key;
-  const image_hostion_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+  const imageHostingKey = import.meta.env.VITE_Image_key;
+  const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
-  // handle register
   const onSubmit = async (data) => {
     const { name, email, password, bloodGroup, district, upazila } = data;
-    const imageFile = { image: data.image[0] }; // Access the first file from the FileList
+    const imageFile = new FormData();
+    imageFile.append("image", data.image[0]);
 
-    // upload the img
-    const res = await axiosPublic.post(image_hostion_api, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    if (res.data.success) {
-      // register process
-      registerUser(email, password)
-        .then((res) => console.log(res.user))
-        .catch((err) => console.log(err));
+    try {
+      // Upload the image to image hosting service
+      const res = await axiosPublic.post(imageHostingApi, imageFile);
+      if (res.data.success) {
+        const imageUrl = res.data.data.display_url;
 
-      // user data
-      const userInfo = {
-        name,
-        email,
-        image: res.data.data.display_url,
-        bloodGroup,
-        district,
-        upazila,
-        role: "Donor",
-        status: "active",
-      };
+        // Register the user with email and password
+        await registerUser(email, password);
 
-      // user data save on database
-      const userResponse = await axiosPublic.post("/users", userInfo);
-      if (userResponse.data.insertedId) {
-        // Reset form fields
-        reset();
-        toast.success("Registration Successful!");
-        navigate("/");
+        // Update the user profile with the name and image URL
+        await updateUserProfile(name, imageUrl);
+
+        // Prepare user info for saving to the database
+        const userInfo = {
+          name,
+          email,
+          image: imageUrl,
+          bloodGroup,
+          district,
+          upazila,
+          role: "Donor",
+          status: "active",
+        };
+
+        // Save user info to the database
+        const userResponse = await axiosPublic.post("/users", userInfo);
+        if (userResponse.data.insertedId) {
+          reset();
+          toast.success("Registration Successful!");
+          navigate("/");
+        }
       }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      toast.error("Registration failed. Please try again.");
     }
   };
 
-  // Watch password to validate confirm password
   const password = watch("password", "");
 
   return (
@@ -283,7 +282,7 @@ function Register() {
               {password && (
                 <span
                   className="absolute top-[30%] right-[5%] text-white"
-                  onClick={handelToogle}
+                  onClick={handleToggle}
                 >
                   {showPassword ? (
                     <FaRegEye size={22} />
