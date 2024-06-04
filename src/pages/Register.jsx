@@ -65,13 +65,19 @@ function Register() {
         // Update the user profile with the name and image URL
         await updateUserProfile(name, imageUrl);
 
+        // Find the district name based on the selected district ID
+        const selectedDistrictObj = districts.find((d) => d.id === district);
+        const districtName = selectedDistrictObj
+          ? selectedDistrictObj.name
+          : "";
+
         // Prepare user info for saving to the database
         const userInfo = {
           name,
           email,
           image: imageUrl,
           bloodGroup,
-          district,
+          district: districtName,
           upazila,
           role: "Donor",
           status: "active",

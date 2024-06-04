@@ -8,8 +8,10 @@ import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function CreateDonation() {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
   const [value, onChange] = useState("10:00");
   const { user, loading } = useAuth();
@@ -105,6 +107,7 @@ function CreateDonation() {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate("/dashboard/my-donation-request");
       }
     });
   };
