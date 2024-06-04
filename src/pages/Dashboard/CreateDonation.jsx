@@ -7,11 +7,12 @@ import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 function CreateDonation() {
   const [startDate, setStartDate] = useState(new Date());
   const [value, onChange] = useState("10:00");
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
@@ -81,7 +82,7 @@ function CreateDonation() {
       toast.error("You Must Fill All The Fields");
       return;
     }
-    console.log(
+    const donation = {
       name,
       email,
       recipient_name,
@@ -91,9 +92,24 @@ function CreateDonation() {
       full_address,
       date,
       time,
-      request_message
-    );
+      request_message,
+      status: "pending",
+    };
+
+    axiosPublic.post("/donation-request", donation).then((res) => {
+      if (res.data.insertedId) {
+        form.reset();
+        Swal.fire({
+          icon: "success",
+          title: "Successfully Create Donation Request",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
+
+  if (loading) return <p>Loading..</p>;
 
   return (
     <div className="p-10 bg-gray-200">
