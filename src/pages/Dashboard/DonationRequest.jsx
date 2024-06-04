@@ -4,6 +4,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 import { IoTrash } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { FaRegEdit } from "react-icons/fa";
 
 function DonationRequest() {
   const { user, loading } = useAuth();
@@ -19,7 +20,6 @@ function DonationRequest() {
       const res = await axiosPublic.get(`/donation-request/${user?.email}`);
       return res.data;
     },
-    enabled: !!user,
   });
 
   // handle delete btn
@@ -50,8 +50,6 @@ function DonationRequest() {
   };
 
   if (loading || isLoading) return <p>Loading..</p>;
-
-  console.log(donations);
 
   return (
     <>
@@ -90,7 +88,7 @@ function DonationRequest() {
                     <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                       Details
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                       Action
                     </th>
                   </tr>
@@ -117,7 +115,13 @@ function DonationRequest() {
                           View
                         </Link>
                       </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                      <td className="px-4 py-4 text-sm whitespace-nowrap flex gap-3 justify-center">
+                        <Link
+                          to={`/dashboard/update-donation/${donation._id}`}
+                          className="btn bg-blue-500 hover:bg-blue-700"
+                        >
+                          <FaRegEdit size={25} color="#fff" />
+                        </Link>
                         <button
                           onClick={() => handleDelete(donation._id)}
                           className="btn bg-red-500 hover:bg-red-700"

@@ -12,7 +12,6 @@ function Profile() {
     queryKey: ["user", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/users/${user?.email}`);
-      //   console.log(res.data);
       return res.data;
     },
   });
@@ -22,7 +21,7 @@ function Profile() {
 
   return (
     <>
-      <div className="p-10 bg-gray-200">
+      <div className="p-10 bg-gray-200 rounded-2xl">
         <h2 className="text-center text-5xl font-semibold text-red-500">
           Profile Information
         </h2>
@@ -56,13 +55,16 @@ function Profile() {
               </div>
             </dialog>
 
-            <p className="text-xl">Name: {userData.name}</p>
-            <p className="text-xl">Email: {userData.email}</p>
-            <p className="text-xl">
-              Blood Group: <span>{userData.bloodGroup}</span>
-            </p>
-            <p className="text-xl">District: {userData.district}</p>
-            <p className="text-xl">Upazila: {userData.upazila}</p>
+            {/* user details */}
+            <div className="">
+              <p className="text-xl">Name: {userData.name}</p>
+              <p className="text-xl">Email: {userData.email}</p>
+              <p className="text-xl">
+                Blood Group: <span>{userData.bloodGroup}</span>
+              </p>
+              <p className="text-xl">District: {userData.district}</p>
+              <p className="text-xl">Upazila: {userData.upazila}</p>
+            </div>
           </div>
         </div>
       </div>

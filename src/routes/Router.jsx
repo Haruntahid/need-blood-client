@@ -8,6 +8,8 @@ import DonorHome from "../pages/Dashboard/DonorHome/DonorHome";
 import Profile from "../pages/Dashboard/Profile";
 import CreateDonation from "../pages/Dashboard/CreateDonation";
 import DonationRequest from "../pages/Dashboard/DonationRequest";
+import PrivateRoute from "./PrivatRoute";
+import UpdateDonation from "../pages/Dashboard/UpdateDonation";
 
 export const router = createBrowserRouter([
   {
@@ -23,11 +25,15 @@ export const router = createBrowserRouter([
   // dashboard
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       // donor routes
       {
-        path: "donorHome",
+        index: true,
         element: <DonorHome />,
       },
       {
@@ -41,6 +47,12 @@ export const router = createBrowserRouter([
       {
         path: "my-donation-request",
         element: <DonationRequest />,
+      },
+      {
+        path: "update-donation/:id",
+        element: <UpdateDonation />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/donation/${params.id}`),
       },
     ],
   },

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
+import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import toast from "react-hot-toast";
@@ -112,7 +112,7 @@ function CreateDonation() {
   if (loading) return <p>Loading..</p>;
 
   return (
-    <div className="p-10 bg-gray-200">
+    <div className="p-10 bg-gray-200 rounded-2xl">
       <h2 className="text-center text-5xl font-semibold text-red-500">
         Create Donation Request
       </h2>
