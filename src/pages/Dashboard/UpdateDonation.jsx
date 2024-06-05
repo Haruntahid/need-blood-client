@@ -116,6 +116,7 @@ function UpdateDonation() {
       .put(`donation-update/${_id}`, donation)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
+          // refetch();
           Swal.fire({
             icon: "success",
             title: "Successfully Update Donation Data",

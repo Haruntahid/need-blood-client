@@ -102,22 +102,19 @@ function Navbar() {
               <div className="hidden md:block">
                 {/* Avatar */}
                 <img
-                  className="rounded-full"
+                  className="rounded-full h-14 w-14 object-cover"
                   referrerPolicy="no-referrer"
                   src={
                     user && user.photoURL
                       ? user.photoURL
                       : "https://i.ibb.co/HTR5dpk/16-168770-user-iconset-no-profile-picture-icon-circle-clipart.jpg"
                   }
-                  alt="profile"
-                  height="50"
-                  width="50"
                 />
               </div>
             </div>
           </div>
           {isOpen && (
-            <div className="absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 md:right-28 top-[70px] text-sm">
+            <div className="absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 md:right-28 top-[70px] text-sm z-20">
               <div className="flex flex-col cursor-pointer w-full">
                 <Link
                   to="/"
