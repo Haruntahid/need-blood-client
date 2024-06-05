@@ -9,11 +9,13 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 function AuthProvider({ children }) {
+  const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,6 +33,8 @@ function AuthProvider({ children }) {
 
   //   logout user
   const logOut = () => {
+    setLoading(true);
+    axiosPublic.get("/logout").then((res) => console.log(res.data));
     return signOut(auth);
   };
 
@@ -49,10 +53,15 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        axiosPublic
+          .post("/jwt", { email: currentUser.email })
+          .then((res) => console.log(res.data));
+      }
       setLoading(false);
     });
     return () => unSubscribe();
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,

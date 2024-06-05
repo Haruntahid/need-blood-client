@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaRegEdit } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -9,6 +10,7 @@ import toast from "react-hot-toast";
 function Profile() {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState({
@@ -24,7 +26,7 @@ function Profile() {
   } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/users/${user?.email}`);
+      const res = await axiosSecure.get(`/users/${user?.email}`);
       return res.data;
     },
   });
@@ -78,7 +80,7 @@ function Profile() {
     const user = { name, email, district, upazila, bloodGroup };
 
     // console.log(user);
-    axiosPublic.put(`/user/${user.email}`, user).then((res) => {
+    axiosSecure.put(`/user/${user.email}`, user).then((res) => {
       if (res.data.modifiedCount > 0) {
         document.getElementById("my_modal_4").close();
         refetch();

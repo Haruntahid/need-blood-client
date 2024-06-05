@@ -10,6 +10,7 @@ import CreateDonation from "../pages/Dashboard/CreateDonation";
 import DonationRequest from "../pages/Dashboard/DonationRequest";
 import PrivateRoute from "./PrivatRoute";
 import UpdateDonation from "../pages/Dashboard/UpdateDonation";
+import DonationReqDetails from "../pages/Dashboard/DonationReqDetails";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,12 @@ export const router = createBrowserRouter([
       {
         path: "update-donation/:id",
         element: <UpdateDonation />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/donation/${params.id}`),
+      },
+      {
+        path: "donation-details/:id",
+        element: <DonationReqDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/donation/${params.id}`),
       },
