@@ -5,6 +5,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Register() {
   const axiosPublic = useAxiosPublic();
@@ -55,7 +56,12 @@ function Register() {
 
     try {
       // Upload the image to image hosting service
-      const res = await axiosPublic.post(imageHostingApi, imageFile);
+      const res = await axios.post(imageHostingApi, imageFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      console.log(res.data);
       if (res.data.success) {
         const imageUrl = res.data.data.display_url;
 
@@ -85,6 +91,7 @@ function Register() {
 
         // Save user info to the database
         const userResponse = await axiosPublic.post("/users", userInfo);
+        console.log(userResponse.data);
         if (userResponse.data.insertedId) {
           reset();
           toast.success("Registration Successful!");

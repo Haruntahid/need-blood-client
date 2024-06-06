@@ -53,7 +53,14 @@ function DonorHome() {
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
         <h2 className="text-center text-5xl font-semibold text-red-500">
-          Welcome {user.displayName ? user.displayName : "Dude"}!!
+          Welcome{" "}
+          <span
+            className="capitalize bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent animate-gradient"
+            style={{ display: "inline-block" }}
+          >
+            {user.displayName ? user.displayName : "Dude"}
+          </span>
+          !!
         </h2>
       </div>
       <div className="mt-10">

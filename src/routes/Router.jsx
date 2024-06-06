@@ -11,6 +11,7 @@ import DonationRequest from "../pages/Dashboard/DonationRequest";
 import PrivateRoute from "./PrivatRoute";
 import UpdateDonation from "../pages/Dashboard/UpdateDonation";
 import DonationReqDetails from "../pages/Dashboard/DonationReqDetails";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 export const router = createBrowserRouter([
   {
@@ -32,9 +33,9 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // donor routes
+      //================= Donor Routes =====================
       {
-        index: true,
+        path: "/dashboard/donor",
         element: <DonorHome />,
       },
       {
@@ -60,6 +61,12 @@ export const router = createBrowserRouter([
         element: <DonationReqDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/donation/${params.id}`),
+      },
+
+      // ========== Admin Routes ===================
+      {
+        path: "/dashboard/admin",
+        element: <AdminHome />,
       },
     ],
   },

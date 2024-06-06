@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaRegEdit } from "react-icons/fa";
+import { FaMapMarkerAlt, FaRegEdit, FaTint, FaUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { IoMailSharp } from "react-icons/io5";
 
 function Profile() {
   const { user } = useAuth();
@@ -114,12 +115,7 @@ function Profile() {
           </div>
           <div className="mt-6">
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            <button
-              className="btn"
-              onClick={() => document.getElementById("my_modal_4").showModal()}
-            >
-              <FaRegEdit />
-            </button>
+
             <dialog id="my_modal_4" className="modal">
               <div className="modal-box w-11/12 max-w-5xl">
                 <form method="dialog">
@@ -235,14 +231,52 @@ function Profile() {
             </dialog>
 
             {/* user details */}
-            <div className="">
-              <p className="text-xl">Name: {userData.name}</p>
-              <p className="text-xl">Email: {userData.email}</p>
-              <p className="text-xl">
-                Blood Group: <span>{userData.bloodGroup}</span>
-              </p>
-              <p className="text-xl">District: {userData.district}</p>
-              <p className="text-xl">Upazila: {userData.upazila}</p>
+            <div className="flex flex-col max-w-xl p-6 bg-white shadow-lg rounded-lg border border-gray-200 space-y-3 mx-auto relative">
+              <div className="absolute right-5">
+                <button
+                  className="btn"
+                  onClick={() =>
+                    document.getElementById("my_modal_4").showModal()
+                  }
+                >
+                  <FaRegEdit size={20} />
+                </button>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaUser className="text-gray-600 text-xl" />
+                <p className="text-2xl font-semibold text-gray-800">
+                  {userData.name}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <IoMailSharp size={20} className="text-gray-600" />
+                <p className="text-2xl font-semibold text-gray-800">
+                  {userData.email}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 mb-4">
+                <FaTint className="text-red-500 text-xl" />
+                <p className="text-xl text-gray-700">
+                  Blood Group:{" "}
+                  <span className="font-medium text-red-500">
+                    {userData.bloodGroup}
+                  </span>
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt className="text-gray-600 text-xl" />
+                <p className="text-xl text-gray-700 font-bold">
+                  <span className="font-medium">District:</span>{" "}
+                  {userData.district}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt className="text-gray-600 text-xl" />
+                <p className="text-xl text-gray-700 font-bold">
+                  <span className="font-medium">Upazila:</span>{" "}
+                  {userData.upazila}
+                </p>
+              </div>
             </div>
           </div>
         </div>
