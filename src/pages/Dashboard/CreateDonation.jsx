@@ -9,6 +9,7 @@ import "react-clock/dist/Clock.css";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function CreateDonation() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function CreateDonation() {
   const [value, onChange] = useState("10:00");
   const { user, loading } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState({
@@ -98,7 +100,7 @@ function CreateDonation() {
       status: "pending",
     };
 
-    axiosPublic.post("/donation-request", donation).then((res) => {
+    axiosSecure.post("/donation-request", donation).then((res) => {
       if (res.data.insertedId) {
         form.reset();
         Swal.fire({
@@ -108,6 +110,8 @@ function CreateDonation() {
           timer: 1500,
         });
         navigate("/dashboard/my-donation-request");
+      } else {
+        toast.error(res.data.message);
       }
     });
   };

@@ -8,7 +8,7 @@ function AdminHome() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["overview/donors-requests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/overview/donors-requests");
@@ -16,6 +16,8 @@ function AdminHome() {
       return res.data;
     },
   });
+
+  if (isLoading) return <p>Loading......</p>;
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
