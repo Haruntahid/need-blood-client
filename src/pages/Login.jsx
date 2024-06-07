@@ -43,13 +43,13 @@ function Login() {
   };
   return (
     <>
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-red-500">
         <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
           <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
             <div className="flex justify-center mx-auto">
               <img
-                className="w-auto h-7 sm:h-8"
-                src="https://merakiui.com/images/logo.svg"
+                className="w-auto h-12"
+                src="https://i.ibb.co/2qtgY2Z/445379615-331727106468525-5982881440624507647-n.png"
                 alt=""
               />
             </div>
@@ -73,7 +73,7 @@ function Login() {
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-gray-300 dark:text-gray-500"
+                    className="w-6 h-6 text-gray-800 "
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -87,14 +87,12 @@ function Login() {
                     pattern: /^\S+@\S+$/i,
                   })}
                   type="email"
-                  className="block w-full py-3 pl-10 pr-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  className="block w-full py-3 pl-10 pr-3 text-gray-800 bg-white border rounded-lg focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Email"
                 />
               </label>
               {errors.email && (
-                <p className="text-red-500 mt-1">
-                  Provide Your Email For Login
-                </p>
+                <p className="text-white mt-1">Provide Your Email For Login</p>
               )}
             </div>
 
@@ -104,7 +102,7 @@ function Login() {
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-gray-300 dark:text-gray-500"
+                    className="w-6 h-6 text-gray-800"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -115,11 +113,11 @@ function Login() {
                 <input
                   {...register("password", { required: true, minLength: 6 })}
                   type={showPassword ? "text" : "password"}
-                  className="block w-full py-3 pl-10 pr-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  className="block w-full py-3 pl-10 pr-3 text-gray-800 bg-white border rounded-lg  focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Password"
                 />
                 <span
-                  className="absolute top-[30%] right-[5%] text-white"
+                  className="absolute top-[30%] right-[5%] text-gray-800"
                   onClick={handelToogle}
                 >
                   {showPassword ? (
@@ -130,7 +128,7 @@ function Login() {
                 </span>
               </label>
               {errors.password && (
-                <p className="text-red-500 mt-1">
+                <p className="text-white mt-1">
                   Provide Your Password For Login
                 </p>
               )}
@@ -142,9 +140,11 @@ function Login() {
               </button>
 
               <div className="mt-6 text-center ">
-                <p href="#" className="text-sm dark:text-blue-400">
+                <p href="#" className="text-sm text-white">
                   Don&apos;t have an account?{" "}
-                  <Link to={"/register"}>Create One</Link>
+                  <Link className="underline" to={"/register"}>
+                    Create One
+                  </Link>
                 </p>
               </div>
             </div>

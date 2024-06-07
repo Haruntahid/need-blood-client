@@ -55,7 +55,13 @@ function Navbar() {
                 </li>
               </ul>
             </div>
-            <a className="btn btn-ghost text-3xl text-white">Need-Blood?</a>
+            <Link to={"/"}>
+              <img
+                className="w-[50%]"
+                src="https://i.ibb.co/5WhV0Xh/441941560-2223188281351982-3493863815690746400-n.png"
+                alt=""
+              />
+            </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 space-x-3 text-xl">

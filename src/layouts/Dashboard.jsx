@@ -16,11 +16,11 @@ function Dashboard() {
 
   return (
     <div className="relative min-h-screen flex">
-      <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 fixed">
+      <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-red-500 border-r rtl:border-r-0 rtl:border-l fixed">
         <a>
           <img
-            className="w-auto h-7"
-            src="https://merakiui.com/images/logo.svg"
+            className="w-auto h-14 mx-auto"
+            src="https://i.ibb.co/2qtgY2Z/445379615-331727106468525-5982881440624507647-n.png"
             alt=""
           />
         </a>
@@ -38,7 +38,9 @@ function Dashboard() {
                   }
                 >
                   <IoHome />
-                  <span className="mx-2 text-sm font-medium">Home</span>
+                  <span className="mx-2 text-sm font-medium text-white">
+                    Home
+                  </span>
                 </NavLink>
                 <NavLink
                   to={"/dashboard/all-users"}
@@ -49,7 +51,35 @@ function Dashboard() {
                   }
                 >
                   <IoHome />
-                  <span className="mx-2 text-sm font-medium">All Users</span>
+                  <span className="mx-2 text-sm font-medium text-white">
+                    All Users
+                  </span>
+                </NavLink>
+                <NavLink
+                  to={"/dashboard/all-blood-donation-request"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-gray-100 dark:bg-gray-800 "
+                      : "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  }
+                >
+                  <IoHome />
+                  <span className="mx-2 text-sm font-medium text-white">
+                    All Blood Donation Request
+                  </span>
+                </NavLink>
+                <NavLink
+                  to={"/dashboard/content-management"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-gray-100 dark:bg-gray-800 "
+                      : "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  }
+                >
+                  <IoHome />
+                  <span className="mx-2 text-sm font-medium text-white">
+                    Content Management
+                  </span>
                 </NavLink>
               </>
             )}
@@ -66,7 +96,9 @@ function Dashboard() {
                   }
                 >
                   <IoHome />
-                  <span className="mx-2 text-sm font-medium">Home</span>
+                  <span className="mx-2 text-sm font-medium text-white">
+                    Home
+                  </span>
                 </NavLink>
 
                 <NavLink
@@ -78,7 +110,9 @@ function Dashboard() {
                   }
                 >
                   <FaUser />
-                  <span className="mx-2 text-sm font-medium">Profile</span>
+                  <span className="mx-2 text-sm font-medium text-white">
+                    Profile
+                  </span>
                 </NavLink>
 
                 <NavLink
@@ -90,7 +124,7 @@ function Dashboard() {
                   }
                 >
                   <BiSolidDonateBlood />
-                  <span className="mx-2 text-sm font-medium">
+                  <span className="mx-2 text-sm font-medium text-white">
                     My Donation Requests
                   </span>
                 </NavLink>
@@ -104,8 +138,40 @@ function Dashboard() {
                   }
                 >
                   <MdCreateNewFolder />
-                  <span className="mx-2 text-sm font-medium">
+                  <span className="mx-2 text-sm font-medium text-white">
                     Create Donation Request
+                  </span>
+                </NavLink>
+              </>
+            )}
+
+            {/* volunteer dashboard */}
+            {role === "Volunteer" && (
+              <>
+                <NavLink
+                  to={"/dashboard/volunteer"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-gray-100 dark:bg-gray-800 "
+                      : "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  }
+                >
+                  <IoHome />
+                  <span className="mx-2 text-sm font-medium text-white">
+                    Home
+                  </span>
+                </NavLink>
+                <NavLink
+                  to={"/dashboard/all-blood-donation-request2"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-gray-100 dark:bg-gray-800 "
+                      : "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  }
+                >
+                  <IoHome />
+                  <span className="mx-2 text-sm font-medium text-white">
+                    All Blood Donation Request
                   </span>
                 </NavLink>
               </>
@@ -120,7 +186,9 @@ function Dashboard() {
             className="flex w-full items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
           >
             <CiLogout size={20} color="#fff" />
-            <span className="mx-2 text-sm font-medium text-white">Logout</span>
+            <span className="mx-2 text-sm font-medium text-white text-white">
+              Logout
+            </span>
           </button>
         </div>
       </aside>

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 function AllUsers() {
   const axiosSecure = useAxiosSecure();
@@ -16,7 +17,19 @@ function AllUsers() {
     console.log(id);
     axiosSecure.patch(`/status/${id}`).then((res) => {
       if (res.data.modifiedCount > 0) {
+        toast.success("Status Successfully Updated!");
         refetch();
+      }
+    });
+  };
+
+  const handleRole = (id) => {
+    console.log(id);
+    axiosSecure.patch(`/role/${id}`).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+      } else {
+        toast.error(res.data.message);
       }
     });
   };
@@ -90,12 +103,20 @@ function AllUsers() {
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         {user.status}
                       </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap flex gap-3 justify-center">
+                      <td className="px-4 py-4 text-sm whitespace-nowrap gap-3 text-center">
                         <button
                           onClick={() => handleStatus(user._id)}
                           className="btn text-xs max-w-18"
                         >
                           {user.status === "active" ? "Blocked" : "Unblocked"}
+                        </button>
+                      </td>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap gap-3 text-center">
+                        <button
+                          onClick={() => handleRole(user._id)}
+                          className="btn text-xs"
+                        >
+                          update
                         </button>
                       </td>
                     </tr>
