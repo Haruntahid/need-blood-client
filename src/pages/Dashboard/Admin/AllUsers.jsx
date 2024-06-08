@@ -23,9 +23,9 @@ function AllUsers() {
     });
   };
 
-  const handleRole = (id) => {
-    console.log(id);
-    axiosSecure.patch(`/role/${id}`).then((res) => {
+  const handleRole = (id, newRole) => {
+    console.log(id, newRole);
+    axiosSecure.patch(`/role/${id}`, { role: newRole }).then((res) => {
       if (res.data.modifiedCount > 0) {
         refetch();
       } else {
@@ -67,10 +67,10 @@ function AllUsers() {
                     <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                       Name
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                       Active Role
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                       Status
                     </th>
                     <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
@@ -97,27 +97,59 @@ function AllUsers() {
                       <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                         {user.name}
                       </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        {user.role}
+                      <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                        <span
+                          className={`px-6 py-1 rounded-full ${
+                            user.role === "Admin"
+                              ? "bg-green-100 text-green-500"
+                              : user.role === "Donor"
+                              ? "bg-blue-100 text-blue-500"
+                              : user.role === "Volunteer"
+                              ? "bg-purple-100 text-purple-500"
+                              : ""
+                          }`}
+                        >
+                          {user.role}
+                        </span>
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        {user.status}
+                        <span
+                          className={`flex justify-center items-center gap-2 px-6 py-1 rounded-full text-${
+                            user.status === "active" ? "green" : "red"
+                          }-500`}
+                        >
+                          <span
+                            className={`w-3 h-3 rounded-full ${
+                              user.status === "active"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          ></span>
+                          {user.status}
+                        </span>
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap gap-3 text-center">
                         <button
                           onClick={() => handleStatus(user._id)}
-                          className="btn text-xs max-w-18"
+                          className={`px-5 py-2 rounded-md min-w-28 text-xs ${
+                            user.status === "active"
+                              ? "bg-red-500 text-white hover:bg-red-700"
+                              : "bg-green-500 text-white hover:bg-green-700"
+                          }`}
                         >
                           {user.status === "active" ? "Blocked" : "Unblocked"}
                         </button>
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap gap-3 text-center">
-                        <button
-                          onClick={() => handleRole(user._id)}
-                          className="btn text-xs"
+                        <select
+                          value={user.role}
+                          onChange={(e) => handleRole(user._id, e.target.value)}
+                          className="text-xs border border-gray-500 bg-red-50 rounded-md px-2 py-2 focus:outline-none focus:border-blue-500"
                         >
-                          update
-                        </button>
+                          <option value="Admin">Admin</option>
+                          <option value="Donor">Donor</option>
+                          <option value="Volunteer">Volunteer</option>
+                        </select>
                       </td>
                     </tr>
                   ))}

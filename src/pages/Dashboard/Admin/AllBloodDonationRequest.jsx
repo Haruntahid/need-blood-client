@@ -53,9 +53,11 @@ function AllBloodDonationRequest() {
   if (isLoading) return <p>Loading..</p>;
   return (
     <>
-      <h2 className="text-center text-5xl font-semibold text-red-500 mt-10">
-        All Donation Request
-      </h2>
+      <div className="p-10 bg-gray-200 rounded-2xl">
+        <h2 className="text-center text-5xl font-semibold text-red-500">
+          All Blood Donation Request
+        </h2>
+      </div>
       {donations.length > 0 ? (
         <div className="flex flex-col mt-10">
           <div className="-mx-4 -my-2 overflow-x-auto lg:overflow-x-hidden">

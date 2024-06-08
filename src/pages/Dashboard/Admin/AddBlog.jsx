@@ -4,12 +4,18 @@ import JoditEditor from "jodit-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function AddBlog() {
+  const { user, loading } = useAuth();
   const { register, handleSubmit, reset } = useForm();
   const [content, setContent] = useState("");
   const axiosSecure = useAxiosSecure();
   const editor = useRef(null);
+  const navigate = useNavigate();
+
+  console.log(user);
 
   const onSubmit = async (data) => {
     try {
@@ -31,20 +37,26 @@ function AddBlog() {
         thumbnail: thumbnailUrl,
         content: content,
         status: "draft",
+        author: user.displayName,
+        authorEmail: user.email,
+        authorImage: user.photoUrl,
       };
 
-      // Send blog data to your server
+      // Send blog data to database
       await axiosSecure.post("/add-blog", blog);
 
       // Reset the form
       reset();
       setContent("");
       toast.success("Blog created successfully!");
+      navigate("/dashboard/content-management");
     } catch (error) {
       console.error("Error creating blog:", error);
       toast.error("Error creating blog. Please try again.");
     }
   };
+
+  if (loading) return <p>loading....</p>;
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">

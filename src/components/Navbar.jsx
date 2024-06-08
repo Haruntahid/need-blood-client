@@ -72,13 +72,23 @@ function Navbar() {
                   }
                   to={"/"}
                 >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-white border-b-2" : ""
+                  }
+                  to={"/donation-request"}
+                >
                   Donation Requests
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? "text-primary border-b-2" : ""
+                    isActive ? "text-white border-b-2" : ""
                   }
                   to={"/blog"}
                 >
@@ -87,14 +97,14 @@ function Navbar() {
               </li>
 
               <li>
-                <NavLink
+                {/* <NavLink
                   className={({ isActive }) =>
-                    isActive ? "text-primary border-b-2" : ""
+                    isActive ? "text-white border-b-2" : ""
                   }
                   to={"/blog"}
                 >
                   Fundings
-                </NavLink>
+                </NavLink> */}
               </li>
             </ul>
           </div>

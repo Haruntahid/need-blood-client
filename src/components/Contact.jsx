@@ -29,7 +29,7 @@ function Contact() {
               id="name"
               type="text"
               placeholder=""
-              className="w-full p-3 rounded-2xl mt-2 border border-red-300"
+              className="w-full p-3 rounded-lg mt-2 border border-red-300"
             />
           </div>
           <div>
@@ -39,7 +39,7 @@ function Contact() {
             <input
               id="email"
               type="email"
-              className="w-full p-3 rounded-2xl mt-2 border border-red-300 "
+              className="w-full p-3 rounded-lg mt-2 border border-red-300 "
             />
           </div>
           <div>
@@ -49,7 +49,7 @@ function Contact() {
             <textarea
               id="message"
               rows="3"
-              className="w-full p-3 rounded-2xl mt-2 border border-red-300"
+              className="w-full p-3 rounded-lg mt-2 border border-red-300"
             ></textarea>
           </div>
           <button
