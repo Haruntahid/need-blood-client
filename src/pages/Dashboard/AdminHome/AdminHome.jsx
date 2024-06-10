@@ -38,24 +38,24 @@ function AdminHome() {
         </h2>
       </div>
       <div className="grid grid-cols-3 gap-6 mt-10">
-        <div className="flex gap-6 items-center p-5 bg-red-50 rounded-2xl">
+        <div className="flex gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-8 border-red-500">
           <FaUsers size={80} />
           <div>
-            <p className="text-3xl font-bold">{data.donors}</p>{" "}
+            <p className="text-4xl font-bold">{data.donors}</p>{" "}
             <p className="text-xs">Donors</p>
           </div>
         </div>
-        <div className="flex gap-6 items-center p-5 bg-red-50 rounded-2xl">
+        <div className="flex gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-8 border-red-500">
           <BiSolidDonateBlood size={80} />
           <div>
-            <p className="text-3xl font-bold">{data.donationReq}</p>{" "}
+            <p className="text-4xl font-bold">{data.donationReq}</p>{" "}
             <p className="text-xs">Donation Requests</p>
           </div>
         </div>
-        <div className="flex gap-6 items-center p-5 bg-red-50 rounded-2xl">
+        <div className="flex gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-8 border-red-500">
           <FaDonate size={80} />
           <div>
-            <p className="text-3xl font-bold">00</p>{" "}
+            <p className="text-4xl font-bold">${data.total}</p>{" "}
             <p className="text-xs">Funding</p>
           </div>
         </div>

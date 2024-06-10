@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function CreateDonation() {
+  const [bloodType, setBloodType] = useState("");
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
   const [value, onChange] = useState("10:00");
@@ -69,6 +70,7 @@ function CreateDonation() {
     const full_address = form.full_address.value;
     const date = form.date.value;
     const time = form.time.value;
+    const blood_type = bloodType;
     const request_message = form.request_message.value;
 
     if (
@@ -81,6 +83,7 @@ function CreateDonation() {
       !full_address ||
       !date ||
       !time ||
+      !blood_type ||
       !request_message
     ) {
       toast.error("You Must Fill All The Fields");
@@ -96,6 +99,7 @@ function CreateDonation() {
       full_address,
       date,
       time,
+      blood_type,
       request_message,
       status: "pending",
     };
@@ -237,29 +241,52 @@ function CreateDonation() {
               />
             </div>
 
-            {/* Donation Date */}
-            <div>
-              <label className="text-btn-color block mb-2">
-                Donation Date:
-              </label>
-              <DatePicker
-                name="date"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                dateFormat="MM/dd/yyyy"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div>
-              <label className="text-btn-color block mb-2">
-                Donation Time:
-              </label>
-              <TimePicker
-                name="time"
-                onChange={onChange}
-                value={value}
-                className="h-12 rounded-lg bg-white w-full"
-              />
+            <div className="w-full lg:w-1/2 flex gap-10">
+              <div>
+                <label className="text-btn-color block mb-2">Blood Type:</label>
+                <select
+                  className="block w-full py-3 pl-4 pr-3 text-black bg-white rounded-lg dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  value={bloodType}
+                  onChange={(e) => setBloodType(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select Blood Type
+                  </option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+
+              {/* Donation Date */}
+              <div>
+                <label className="text-btn-color block mb-2">
+                  Donation Date:
+                </label>
+                <DatePicker
+                  name="date"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  dateFormat="MM/dd/yyyy"
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div>
+                <label className="text-btn-color block mb-2">
+                  Donation Time:
+                </label>
+                <TimePicker
+                  name="time"
+                  onChange={onChange}
+                  value={value}
+                  className="h-12 rounded-lg bg-white w-full"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-4">

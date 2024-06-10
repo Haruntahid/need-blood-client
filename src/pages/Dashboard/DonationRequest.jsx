@@ -300,7 +300,7 @@ function DonationRequest() {
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
         <h2 className="text-center text-5xl font-semibold text-red-500">
-          All Donation Request
+          My All Donation Request
         </h2>
       </div>
       {donations.length > 0 ? (
@@ -330,19 +330,20 @@ function DonationRequest() {
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Upazila
                       </th>
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
+                        Blood Group
+                      </th>
                       <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                         Status
                       </th>
                       <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                         Details
                       </th>
-                      {donations.some(
-                        (donation) => donation.status === "in progress"
-                      ) && (
-                        <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
-                          Progress Action
-                        </th>
-                      )}
+
+                      <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
+                        Progress Action
+                      </th>
+
                       <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                         Action
                       </th>
@@ -361,6 +362,9 @@ function DonationRequest() {
                           <div className="flex items-center gap-x-2">
                             {donation.upazila}
                           </div>
+                        </td>
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                          <p className="text-red-500">{donation.blood_type}</p>
                         </td>
                         <td className="px-4 py-4 text-center text-sm whitespace-nowrap">
                           <p

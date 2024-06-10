@@ -3,18 +3,16 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 // eslint-disable-next-line react/prop-types
-function CheckoutForm({ closeModal }) {
+function CheckoutForm({ closeModal, refetch }) {
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const navigate = useNavigate();
   const price = 10;
 
   useEffect(() => {
@@ -89,7 +87,7 @@ function CheckoutForm({ closeModal }) {
             showConfirmButton: false,
             timer: 2000,
           });
-          navigate("/funding");
+          refetch();
         }
       }
     }

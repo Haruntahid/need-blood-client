@@ -7,7 +7,11 @@ import Swal from "sweetalert2";
 
 function ContentManagement() {
   const axiosSecure = useAxiosSecure();
-  const { data: blogs = [], refetch } = useQuery({
+  const {
+    data: blogs = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
       const res = await axiosSecure.get("/all-blogs");
@@ -48,6 +52,13 @@ function ContentManagement() {
       }
     });
   };
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-red-500"></div>
+      </div>
+    );
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">

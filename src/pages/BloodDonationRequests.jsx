@@ -50,6 +50,9 @@ function BloodDonationRequests() {
                       </div>
                     </th>
                     <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
+                      Blood Group
+                    </th>
+                    <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                       Date
                     </th>
                     <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
@@ -68,6 +71,9 @@ function BloodDonationRequests() {
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                         {donation.upazila},{donation.district}
+                      </td>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                        <p className="text-red-500">{donation.blood_type}</p>
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
                         {donation.date}

@@ -27,15 +27,18 @@ function Footer() {
             <div className="space-y-2">
               <Link
                 className="hover:underline text-white block"
-                to={"/all-jobs"}
+                to={"/donation-request"}
               >
-                Explore
+                Donation Request
               </Link>
               <Link className="hover:underline text-white block" to={"/blog"}>
                 Blog
               </Link>
-              <Link className="hover:underline text-white block">
-                Companies
+              <Link
+                to={"/funding"}
+                className="hover:underline text-white block"
+              >
+                Funding
               </Link>
               <Link className="hover:underline text-white block">Pricing</Link>
             </div>

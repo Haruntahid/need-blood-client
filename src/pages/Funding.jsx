@@ -11,7 +11,11 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway);
 
 function Funding() {
   const axiosSecure = useAxiosSecure();
-  const { data: payments = [], isLoading } = useQuery({
+  const {
+    data: payments = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
       const res = await axiosSecure.get("/all-payments");
@@ -73,7 +77,7 @@ function Funding() {
                   Payment
                 </h2>
                 <Elements stripe={stripePromise}>
-                  <CheckoutForm closeModal={closeModal} />
+                  <CheckoutForm closeModal={closeModal} refetch={refetch} />
                 </Elements>
               </div>
             </div>
