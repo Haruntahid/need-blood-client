@@ -28,7 +28,7 @@ function Banner() {
               Join as a donor
             </Link>
             <Link
-              to={""}
+              to={"/search"}
               className="border-red-500 btn bg-transparent border text-red-500"
             >
               Search Donors

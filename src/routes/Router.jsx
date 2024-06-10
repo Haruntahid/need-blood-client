@@ -26,11 +26,13 @@ import BloodDonationRequestsDetails from "../pages/BloodDonationRequestsDetails"
 import Funding from "../pages/Funding";
 import VolunteerContentManagement from "../pages/Dashboard/Volunteer/VolunteerContentManagement";
 import SearchDonor from "../pages/SearchDonor";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -82,6 +84,7 @@ export const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage />,
     children: [
       //================= Donor Routes =====================
       {
