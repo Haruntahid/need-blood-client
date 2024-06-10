@@ -1,4 +1,5 @@
-import { IoHome } from "react-icons/io5";
+import { useState } from "react";
+import { IoHome, IoMenu, IoClose } from "react-icons/io5";
 import { Link, Outlet } from "react-router-dom";
 import { CiLogout } from "react-icons/ci";
 import useAuth from "../hooks/useAuth";
@@ -10,7 +11,11 @@ import VolunteerRoutes from "../pages/Dashboard/DashboardRoute/VolunteerRoutes";
 function Dashboard() {
   const { logOut } = useAuth();
   const [role, Loading] = useRole();
-  console.log(role);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   if (Loading)
     return (
@@ -21,7 +26,17 @@ function Dashboard() {
 
   return (
     <div className="relative min-h-screen flex">
-      <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-red-500 border-r rtl:border-r-0 rtl:border-l fixed">
+      {/* Sidebar */}
+      <aside
+        className={`flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-red-500 border-r rtl:border-r-0 rtl:border-l fixed lg:relative transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out z-20`}
+      >
+        {/* Close button for mobile */}
+        <button className="lg:hidden self-end p-2" onClick={toggleSidebar}>
+          <IoClose size={24} color="#fff" />
+        </button>
+
         <Link to={"/"}>
           <img
             className="w-auto h-14 mx-auto"
@@ -33,16 +48,12 @@ function Dashboard() {
         <div className="flex flex-col justify-between flex-1 mt-6">
           <nav className="-mx-3 space-y-3 ">
             {role === "Admin" && <AdminRoutes />}
-
-            {/* Donor */}
             {role === "Donor" && <DonorRoutes />}
-
-            {/* volunteer dashboard */}
             {role === "Volunteer" && <VolunteerRoutes />}
           </nav>
         </div>
 
-        {/* footer logout btn */}
+        {/* Footer logout btn */}
         <div className="pb-10">
           <Link
             to={"/"}
@@ -64,8 +75,23 @@ function Dashboard() {
         </div>
       </aside>
 
-      {/* Outlet --> Dynamic content */}
-      <div className="flex-1 ml-64 overflow-y-auto">
+      {/* Overlay for mobile sidebar */}
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 lg:hidden z-10 transition-opacity ${
+          isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={toggleSidebar}
+      ></div>
+
+      {/* Main content */}
+      <div className="flex-1 lg:ml-64 overflow-y-auto">
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden p-4 focus:outline-none focus:bg-gray-200"
+          onClick={toggleSidebar}
+        >
+          <IoMenu size={24} />
+        </button>
         <div className="p-5">
           <Outlet />
         </div>

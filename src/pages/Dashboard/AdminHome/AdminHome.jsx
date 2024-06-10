@@ -26,7 +26,7 @@ function AdminHome() {
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
-        <h2 className="text-center text-5xl font-semibold text-red-500">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
           Welcome{" "}
           <span
             className="capitalize bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent animate-gradient"
@@ -37,25 +37,25 @@ function AdminHome() {
           !!
         </h2>
       </div>
-      <div className="grid grid-cols-3 gap-6 mt-10">
-        <div className="flex gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-8 border-red-500">
-          <FaUsers size={80} />
+      <div className="grid lg:grid-cols-3 gap-3 lg:gap-6 mt-5 lg:mt-10">
+        <div className="flex gap-5 lg:gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-4 lg:border-b-8 border-red-500">
+          <FaUsers className="text-5xl lg:text-8xl" />
           <div>
-            <p className="text-4xl font-bold">{data.donors}</p>{" "}
+            <p className="text-2xl lg:text-4xl font-bold">{data.donors}</p>{" "}
             <p className="text-xs">Donors</p>
           </div>
         </div>
-        <div className="flex gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-8 border-red-500">
-          <BiSolidDonateBlood size={80} />
+        <div className="flex gap-5 lg:gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-4 lg:border-b-8 border-red-500">
+          <BiSolidDonateBlood className="text-5xl lg:text-8xl" />
           <div>
-            <p className="text-4xl font-bold">{data.donationReq}</p>{" "}
+            <p className="text-2xl lg:text-4xl font-bold">{data.donationReq}</p>{" "}
             <p className="text-xs">Donation Requests</p>
           </div>
         </div>
-        <div className="flex gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-8 border-red-500">
-          <FaDonate size={80} />
+        <div className="flex gap-5 lg:gap-10 items-center p-5 bg-red-50 rounded-3xl shadow-md border-b-4 lg:border-b-8 border-red-500">
+          <FaDonate className="text-5xl lg:text-8xl" />
           <div>
-            <p className="text-4xl font-bold">${data.total}</p>{" "}
+            <p className="text-2xl lg:text-4xl font-bold">${data.total}</p>{" "}
             <p className="text-xs">Funding</p>
           </div>
         </div>

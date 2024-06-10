@@ -105,15 +105,15 @@ function Profile() {
 
   return (
     <>
-      <div className="p-10 bg-gray-200 rounded-2xl">
-        <h2 className="text-center text-5xl font-semibold text-red-500">
+      <div className="p-4 lg:p-10 bg-gray-200 rounded-2xl">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
           Profile Information
         </h2>
         {/* profile section */}
         <div>
           <div className="flex justify-center mt-6">
             <img
-              className="rounded-full border-2 border-red-500 p-2 w-56 h-56 object-cover"
+              className="rounded-full border-2 border-red-500 p-2 w-28 lg:w-56 h-28 lg:h-56 object-cover"
               src={userData.image}
               alt=""
             />
@@ -236,7 +236,7 @@ function Profile() {
             </dialog>
 
             {/* user details */}
-            <div className="flex flex-col max-w-xl p-6 bg-white shadow-lg rounded-lg border border-gray-200 space-y-3 mx-auto relative">
+            <div className="flex flex-col max-w-xl p-3 lg:p-6 bg-white shadow-lg rounded-lg border border-gray-200 space-y-3 mx-auto relative">
               <div className="absolute right-5">
                 <button
                   className="btn"
@@ -249,13 +249,13 @@ function Profile() {
               </div>
               <div className="flex items-center gap-2">
                 <FaUser className="text-gray-600 text-xl" />
-                <p className="text-2xl font-semibold text-gray-800">
+                <p className="text-[22px] lg:text-2xl font-semibold text-gray-800">
                   {userData.name}
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <IoMailSharp size={20} className="text-gray-600" />
-                <p className="text-2xl font-semibold text-gray-800">
+                <p className="text-[22px] lg:text-2xl font-semibold text-gray-800">
                   {userData.email}
                 </p>
               </div>

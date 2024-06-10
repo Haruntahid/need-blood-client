@@ -1,10 +1,10 @@
 function Features() {
   return (
     <>
-      <h2 className="text-center text-red-500 text-5xl font-bold mt-10">
+      <h2 className="text-center text-red-500 text-3xl lg:text-5xl font-bold mt-10 px-3">
         Features
       </h2>
-      <div className="grid grid-cols-3 gap-6 mt-10">
+      <div className="grid lg:grid-cols-3 gap-6 mt-10">
         <div className="p-10 bg-red-50 rounded-xl shadow-xl flex justify-center flex-col items-center">
           <img
             className="w-20 h-20"

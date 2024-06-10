@@ -58,7 +58,7 @@ function AllBloodDonationRequest() {
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
-        <h2 className="text-center text-5xl font-semibold text-red-500">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
           All Blood Donation Request
         </h2>
       </div>

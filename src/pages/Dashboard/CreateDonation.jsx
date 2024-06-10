@@ -129,7 +129,7 @@ function CreateDonation() {
 
   return (
     <div className="p-10 bg-gray-200 rounded-2xl">
-      <h2 className="text-center text-5xl font-semibold text-red-500">
+      <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
         Create Donation Request
       </h2>
       <div className="mt-10">
@@ -241,7 +241,7 @@ function CreateDonation() {
               />
             </div>
 
-            <div className="w-full lg:w-1/2 flex gap-10">
+            <div className="w-full lg:w-1/2 flex flex-col lg:flex-row gap-5 lg:gap-10">
               <div>
                 <label className="text-btn-color block mb-2">Blood Type:</label>
                 <select

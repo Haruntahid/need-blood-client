@@ -57,7 +57,7 @@ function Navbar() {
             </div>
             <Link to={"/"}>
               <img
-                className="w-[50%]"
+                className="w-full lg:w-[50%]"
                 src="https://i.ibb.co/5WhV0Xh/441941560-2223188281351982-3493863815690746400-n.png"
                 alt=""
               />

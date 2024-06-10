@@ -1,7 +1,7 @@
 function Contact() {
   return (
     <>
-      <h2 className="text-center text-red-500 text-5xl font-bold mt-28">
+      <h2 className="text-center text-red-500 text-3xl lg:text-5xl font-bold mt-14 lg:mt-28">
         Connect With Us!
       </h2>
       <div className="grid w-full mt-10 grid-cols-1 gap-8 px-8 py-16 mx-auto rounded-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 bg-red-50">
@@ -17,7 +17,7 @@ function Contact() {
           <img
             src="https://i.ibb.co/PD7bQTR/Red-Cross-Blood-social-sharing-image-jpg-img.jpg"
             alt=""
-            className="w-[80%]"
+            className="w-full lg:w-[80%]"
           />
         </div>
         <form className="space-y-6">

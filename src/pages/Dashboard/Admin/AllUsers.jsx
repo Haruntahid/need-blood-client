@@ -47,7 +47,7 @@ function AllUsers() {
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
-        <h2 className="text-center text-5xl font-semibold text-red-500">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
           All Users
         </h2>
       </div>
@@ -97,7 +97,7 @@ function AllUsers() {
                     <tr key={user._id}>
                       <td className="px-4 py-4 whitespace-nowrap capitalize">
                         <img
-                          className="w-16 h-16 object-cover rounded-full"
+                          className="lg:w-16 w-10 h-10 lg:h-16 object-cover rounded-full"
                           src={user.image}
                           alt=""
                         />
