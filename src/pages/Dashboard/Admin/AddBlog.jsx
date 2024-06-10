@@ -56,11 +56,18 @@ function AddBlog() {
     }
   };
 
-  if (loading) return <p>loading....</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-red-500"></div>
+      </div>
+    );
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-semibold mb-6">Add Blog</h1>
+      <h1 className="text-4xl text-center text-red-500 font-semibold mb-6">
+        Add A Blog
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
@@ -80,6 +87,15 @@ function AddBlog() {
             type="file"
             {...register("thumbnail", { required: true })}
             className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer focus:outline-none"
+            style={{
+              padding: "10px",
+              border: "2px dashed #ccc",
+              borderRadius: "8px",
+              backgroundColor: "#f9f9f9",
+              transition: "border-color 0.3s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#aaa")}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#ccc")}
           />
         </div>
         <div className="mb-4">
@@ -92,12 +108,19 @@ function AddBlog() {
             onBlur={(newContent) => setContent(newContent)} // Save the content onBlur to minimize re-renders
             config={{
               readonly: false,
+              height: 400, // Increase the height of the editor
+            }}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              padding: "10px",
+              backgroundColor: "#f9f9f9",
             }}
           />
         </div>
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+          className="w-full py-2 px-4 bg-red-500 text-white font-semibold rounded-md shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
         >
           Create
         </button>

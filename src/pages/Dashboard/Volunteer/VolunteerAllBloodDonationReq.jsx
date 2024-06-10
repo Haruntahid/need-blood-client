@@ -28,12 +28,17 @@ function VolunteerAllBloodDonationReq() {
     });
   };
 
-  if (isLoading) return <p>Loading..</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-red-500"></div>
+      </div>
+    );
 
   return (
     <>
       <h2 className="text-center text-5xl font-semibold text-red-500 mt-10">
-        All Donation Request 2
+        All Donation Request
       </h2>
       {donations.length > 0 ? (
         <div className="flex flex-col mt-10">
@@ -63,6 +68,9 @@ function VolunteerAllBloodDonationReq() {
                         Upazila
                       </th>
                       <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
+                        Blood Group
+                      </th>
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                         Status
                       </th>
                       <th className="px-4 py-3.5 text-sm font-normal text-center  rtl:text-right text-gray-500">
@@ -86,6 +94,9 @@ function VolunteerAllBloodDonationReq() {
                           <div className="flex items-center gap-x-2">
                             {donation.upazila}
                           </div>
+                        </td>
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                          <p className="text-red-500">{donation.blood_type}</p>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
                           <p

@@ -15,9 +15,9 @@ function Contact() {
             </div>
           </div>
           <img
-            src="assets/svg/doodle.svg"
+            src="https://i.ibb.co/PD7bQTR/Red-Cross-Blood-social-sharing-image-jpg-img.jpg"
             alt=""
-            className="p-6 h-52 md:h-64"
+            className="w-[80%]"
           />
         </div>
         <form className="space-y-6">

@@ -106,6 +106,16 @@ function Navbar() {
                   Fundings
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-white border-b-2" : ""
+                  }
+                  to={"/search"}
+                >
+                  Search Donor
+                </NavLink>
+              </li>
             </ul>
           </div>
           <div className="navbar-end">

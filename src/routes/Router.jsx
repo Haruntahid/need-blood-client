@@ -24,6 +24,8 @@ import BloodDonationRequests from "../pages/BloodDonationRequests";
 import BlogPage from "../pages/BlogPage";
 import BloodDonationRequestsDetails from "../pages/BloodDonationRequestsDetails";
 import Funding from "../pages/Funding";
+import VolunteerContentManagement from "../pages/Dashboard/Volunteer/VolunteerContentManagement";
+import SearchDonor from "../pages/SearchDonor";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <BlogPage />,
+      },
+      {
+        path: "/search",
+        element: <SearchDonor />,
       },
       {
         path: "/donation-req-details/:id",
@@ -159,10 +165,10 @@ export const router = createBrowserRouter([
         path: "all-blood-donation-request2",
         element: <VolunteerAllBloodDonationReq />,
       },
-      // {
-      //   path: "content-management",
-      //   element: <ContentManagement />,
-      // },
+      {
+        path: "volunteer-content-management",
+        element: <VolunteerContentManagement />,
+      },
     ],
   },
   {
