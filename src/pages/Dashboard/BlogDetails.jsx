@@ -3,7 +3,6 @@ import { useLoaderData } from "react-router-dom";
 
 function BlogDetails() {
   const data = useLoaderData();
-  console.log(data);
   const { title, thumbnail, content, status, author, authorEmail } = data;
 
   return (

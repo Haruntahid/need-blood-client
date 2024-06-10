@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { FaRegEdit } from "react-icons/fa";
 import { IoTrash } from "react-icons/io5";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
@@ -50,7 +49,12 @@ function AllBloodDonationRequest() {
     });
   };
 
-  if (isLoading) return <p>Loading..</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-red-500"></div>
+      </div>
+    );
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
@@ -85,10 +89,10 @@ function AllBloodDonationRequest() {
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Upazila
                       </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                         Status
                       </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                         Details
                       </th>
                       <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
@@ -110,24 +114,34 @@ function AllBloodDonationRequest() {
                             {donation.upazila}
                           </div>
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          {donation.status}
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                          <p
+                            className={`rounded-full px-4 py-1 inline-block ${
+                              donation.status === "pending"
+                                ? "bg-yellow-100 text-yellow-500"
+                                : donation.status === "in progress"
+                                ? "bg-blue-100 text-blue-500"
+                                : donation.status === "done"
+                                ? "bg-green-100 text-green-500"
+                                : donation.status === "canceled"
+                                ? "bg-red-100 text-red-500"
+                                : ""
+                            }`}
+                          >
+                            <span className="capitalize">
+                              {donation.status}
+                            </span>
+                          </p>
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
                           <Link
                             to={`/dashboard/donation-details/${donation._id}`}
-                            className="px-5 py-2 rounded-full bg-red-400 hover:bg-red-600 text-white"
+                            className="px-8 py-2 rounded-full bg-red-400 hover:bg-red-600 text-white"
                           >
                             View
                           </Link>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap flex gap-3 justify-center">
-                          <Link
-                            to={`/dashboard/update-donation/${donation._id}`}
-                            className="btn bg-blue-500 hover:bg-blue-700"
-                          >
-                            <FaRegEdit size={25} color="#fff" />
-                          </Link>
                           <button
                             onClick={() => handleDelete(donation._id)}
                             className="btn bg-red-500 hover:bg-red-700"

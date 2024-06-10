@@ -14,6 +14,7 @@ function useRole() {
       return res.data.getRole;
     },
   });
+  if (loading) return <p>loading...</p>;
   return [role, Loading];
 }
 

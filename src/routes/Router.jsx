@@ -23,6 +23,7 @@ import BlogDetails from "../pages/Dashboard/BlogDetails";
 import BloodDonationRequests from "../pages/BloodDonationRequests";
 import BlogPage from "../pages/BlogPage";
 import BloodDonationRequestsDetails from "../pages/BloodDonationRequestsDetails";
+import Funding from "../pages/Funding";
 
 export const router = createBrowserRouter([
   {
@@ -43,15 +44,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/donation-req-details/:id",
-        element: <BloodDonationRequestsDetails />,
+        element: (
+          <PrivateRoute>
+            <BloodDonationRequestsDetails />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donation/${params.id}`),
+          fetch(`https://need-blood-server.vercel.app/donation/${params.id}`),
       },
       {
         path: "blog-details/:id",
         element: <BlogDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/blog/${params.id}`),
+          fetch(`https://need-blood-server.vercel.app/blog/${params.id}`),
+      },
+      {
+        path: "/funding",
+        element: (
+          <PrivateRoute>
+            <Funding />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -85,13 +98,13 @@ export const router = createBrowserRouter([
         path: "update-donation/:id",
         element: <UpdateDonation />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donation/${params.id}`),
+          fetch(`https://need-blood-server.vercel.app/donation/${params.id}`),
       },
       {
         path: "donation-details/:id",
         element: <DonationReqDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donation/${params.id}`),
+          fetch(`https://need-blood-server.vercel.app/donation/${params.id}`),
       },
 
       // ========== Admin Routes ===================
@@ -135,7 +148,7 @@ export const router = createBrowserRouter([
         path: "blog-details/:id",
         element: <BlogDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/blog/${params.id}`),
+          fetch(`https://need-blood-server.vercel.app/blog/${params.id}`),
       },
       // votunteer routes
       {

@@ -48,10 +48,15 @@ function BloodDonationRequestsDetails() {
     });
   };
 
-  if (loading) return <p>Loading....</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-red-500"></div>
+      </div>
+    );
   return (
     <>
-      <div className="p-10 bg-gray-200 rounded-2xl shadow-lg mx-auto ">
+      <div className="p-10 bg-gray-200 rounded-2xl shadow-lg mx-auto mt-10">
         <h2 className="text-center text-5xl font-bold text-red-500 mb-8">
           Donation Request Details
         </h2>
@@ -149,7 +154,7 @@ function BloodDonationRequestsDetails() {
                       type="text"
                       placeholder="Name"
                       name="name"
-                      defaultValue={user.displayName}
+                      defaultValue={user?.displayName}
                       className="input input-bordered w-full"
                       readOnly
                     />
@@ -160,7 +165,7 @@ function BloodDonationRequestsDetails() {
                       placeholder="Email"
                       type="email"
                       name="email"
-                      defaultValue={user.email}
+                      defaultValue={user?.email}
                       className="input input-bordered w-full"
                       readOnly
                     />

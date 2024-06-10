@@ -111,11 +111,13 @@ function Register() {
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
           <div className="flex justify-center mx-auto">
-            <img
-              className="w-auto h-12"
-              src="https://i.ibb.co/2qtgY2Z/445379615-331727106468525-5982881440624507647-n.png"
-              alt="Logo"
-            />
+            <Link to={"/"}>
+              <img
+                className="w-auto h-12"
+                src="https://i.ibb.co/2qtgY2Z/445379615-331727106468525-5982881440624507647-n.png"
+                alt="Logo"
+              />
+            </Link>
           </div>
 
           <div className="flex items-center justify-center mt-6">

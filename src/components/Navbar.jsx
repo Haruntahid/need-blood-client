@@ -97,14 +97,14 @@ function Navbar() {
               </li>
 
               <li>
-                {/* <NavLink
+                <NavLink
                   className={({ isActive }) =>
                     isActive ? "text-white border-b-2" : ""
                   }
-                  to={"/blog"}
+                  to={"/funding"}
                 >
                   Fundings
-                </NavLink> */}
+                </NavLink>
               </li>
             </ul>
           </div>

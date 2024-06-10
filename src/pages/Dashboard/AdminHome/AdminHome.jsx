@@ -17,7 +17,12 @@ function AdminHome() {
     },
   });
 
-  if (isLoading) return <p>Loading......</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-red-500"></div>
+      </div>
+    );
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">

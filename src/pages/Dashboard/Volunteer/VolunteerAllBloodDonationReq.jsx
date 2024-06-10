@@ -62,10 +62,10 @@ function VolunteerAllBloodDonationReq() {
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Upazila
                       </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                         Status
                       </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                      <th className="px-4 py-3.5 text-sm font-normal text-center  rtl:text-right text-gray-500">
                         Details
                       </th>
                       <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
@@ -87,10 +87,26 @@ function VolunteerAllBloodDonationReq() {
                             {donation.upazila}
                           </div>
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          {donation.status}
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                          <p
+                            className={`rounded-full px-4 py-1 inline-block ${
+                              donation.status === "pending"
+                                ? "bg-yellow-100 text-yellow-500"
+                                : donation.status === "in progress"
+                                ? "bg-blue-100 text-blue-500"
+                                : donation.status === "done"
+                                ? "bg-green-100 text-green-500"
+                                : donation.status === "canceled"
+                                ? "bg-red-100 text-red-500"
+                                : ""
+                            }`}
+                          >
+                            <span className="capitalize">
+                              {donation.status}
+                            </span>
+                          </p>
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
                           <Link
                             to={`/dashboard/donation-details/${donation._id}`}
                             className="px-5 py-2 rounded-full bg-red-400 hover:bg-red-600 text-white"
@@ -101,7 +117,12 @@ function VolunteerAllBloodDonationReq() {
                         <td className="px-4 py-4 text-sm whitespace-nowrap flex gap-3 justify-center">
                           <button
                             onClick={() => handleStatusUpdate(donation._id)}
-                            className="btn"
+                            className={`px-4 py-2 rounded-md ${
+                              donation.status === "pending"
+                                ? "bg-green-500 hover:bg-green-700 text-white"
+                                : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                            }`}
+                            disabled={donation.status !== "pending"}
                           >
                             Mark as progress
                           </button>

@@ -65,7 +65,6 @@ function ContentManagement() {
       </div>
 
       {/* blogs */}
-      <h2>blogs{blogs.length}</h2>
       {blogs.length > 0 ? (
         <div className="flex flex-col mt-10">
           <div className="-mx-4 -my-2 overflow-x-auto lg:overflow-x-hidden">
@@ -93,14 +92,17 @@ function ContentManagement() {
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Author
                       </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                         Status
                       </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                      <th className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500">
                         Details
                       </th>
                       <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
                         Action
+                      </th>
+                      <th className="px-4 py-3.5 text-sm font-normal rtl:text-right text-gray-500 text-center">
+                        Delete
                       </th>
                     </tr>
                   </thead>
@@ -117,37 +119,48 @@ function ContentManagement() {
                         <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                           {blog.title}
                         </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap capitalize">
                           {blog.author}
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          <div className="flex items-center gap-x-2">
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
+                          <span
+                            className={`flex justify-center items-center gap-2 px-6 py-1 rounded-full text-${
+                              blog.status === "published" ? "green" : "red"
+                            }-500`}
+                          >
+                            <span
+                              className={`w-3 h-3 rounded-full ${
+                                blog.status === "published"
+                                  ? "bg-green-500"
+                                  : "bg-red-500"
+                              }`}
+                            ></span>
                             {blog.status}
-                          </div>
+                          </span>
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
                           <Link
-                            className="btn"
+                            className="px-8 py-2 rounded-full bg-red-400 hover:bg-red-600 text-white"
                             to={`/dashboard/blog-details/${blog._id}`}
                           >
                             View Blog
                           </Link>
                         </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm whitespace-nowrap text-center">
                           <button
-                            className="btn"
+                            className={`px-5 py-2 rounded-md min-w-28 text-xs ${
+                              blog.status === "published"
+                                ? "bg-red-500 text-white hover:bg-red-700"
+                                : "bg-green-500 text-white hover:bg-green-700"
+                            }`}
                             onClick={() => handleStatus(blog._id)}
                           >
-                            published
+                            {blog.status === "published"
+                              ? "Unpublished"
+                              : "Published"}
                           </button>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap flex gap-3 justify-center">
-                          {/* <Link
-                            to={`/dashboard/update-donation/${donation._id}`}
-                            className="btn bg-blue-500 hover:bg-blue-700"
-                          >
-                            <FaRegEdit size={25} color="#fff" />
-                          </Link> */}
                           <button
                             onClick={() => handleDelete(blog._id)}
                             className="btn bg-red-500 hover:bg-red-700"
