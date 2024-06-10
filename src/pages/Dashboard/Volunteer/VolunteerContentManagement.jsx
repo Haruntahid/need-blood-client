@@ -21,7 +21,7 @@ function VolunteerContentManagement() {
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
-        <h2 className="text-center text-5xl font-semibold text-red-500">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
           Content Management
         </h2>
       </div>
@@ -120,8 +120,8 @@ function VolunteerContentManagement() {
         </div>
       ) : (
         <div className="flex justify-center items-center h-[50vh]">
-          <p className="text-5xl font-semibold text-red-300">
-            No Donation request
+          <p className="text-3xl text-center lg:text-5xl font-semibold text-red-300">
+            No Blog&apos;s
           </p>
         </div>
       )}

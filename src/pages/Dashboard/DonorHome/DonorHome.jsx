@@ -57,7 +57,7 @@ function DonorHome() {
   return (
     <>
       <div className="p-10 bg-gray-200 rounded-2xl">
-        <h2 className="text-center text-5xl font-semibold text-red-500">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
           Welcome{" "}
           <span
             className="capitalize bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent animate-gradient"
@@ -185,7 +185,7 @@ function DonorHome() {
           </>
         ) : (
           <div className="flex justify-center items-center h-[50vh]">
-            <p className="text-5xl font-semibold text-red-300">
+            <p className="text-3xl text-center lg:text-5xl font-semibold text-red-300">
               You have No Donation request
             </p>
           </div>

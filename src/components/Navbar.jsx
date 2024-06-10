@@ -11,7 +11,7 @@ function Navbar() {
       <div className="bg-red-500">
         <div className="navbar container mx-auto">
           <div className="navbar-start">
-            <div className="dropdown">
+            {/* <div className="dropdown">
               <div
                 tabIndex={0}
                 role="button"
@@ -54,7 +54,7 @@ function Navbar() {
                   <a>Item 3</a>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <Link to={"/"}>
               <img
                 className="w-full lg:w-[50%]"
@@ -147,6 +147,30 @@ function Navbar() {
                   className="block md:hidden px-4 py-3  hover:bg-neutral-200 transition font-semibold"
                 >
                   Home
+                </Link>
+                <Link
+                  to="/donation-request"
+                  className="block md:hidden px-4 py-3  hover:bg-neutral-200 transition font-semibold"
+                >
+                  Donation Requests
+                </Link>
+                <Link
+                  to="/blog"
+                  className="block md:hidden px-4 py-3  hover:bg-neutral-200 transition font-semibold"
+                >
+                  Blog
+                </Link>
+                <Link
+                  to="/funding"
+                  className="block md:hidden px-4 py-3  hover:bg-neutral-200 transition font-semibold"
+                >
+                  Fundings
+                </Link>
+                <Link
+                  to="/search"
+                  className="block md:hidden px-4 py-3  hover:bg-neutral-200 transition font-semibold"
+                >
+                  Search Donor
                 </Link>
 
                 {user ? (

@@ -37,9 +37,11 @@ function VolunteerAllBloodDonationReq() {
 
   return (
     <>
-      <h2 className="text-center text-5xl font-semibold text-red-500 mt-10">
-        All Donation Request
-      </h2>
+      <div className="p-10 bg-gray-200 rounded-2xl">
+        <h2 className="text-center text-3xl lg:text-5xl font-semibold text-red-500">
+          All Donation Request
+        </h2>
+      </div>
       {donations.length > 0 ? (
         <div className="flex flex-col mt-10">
           <div className="-mx-4 -my-2 overflow-x-auto lg:overflow-x-hidden">
@@ -148,7 +150,7 @@ function VolunteerAllBloodDonationReq() {
         </div>
       ) : (
         <div className="flex justify-center items-center h-[50vh]">
-          <p className="text-5xl font-semibold text-red-300">
+          <p className="text-3xl text-center lg:text-5xl font-semibold text-red-300">
             No Donation request
           </p>
         </div>

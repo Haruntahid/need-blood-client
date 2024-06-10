@@ -20,7 +20,7 @@ function Contact() {
             className="w-full lg:w-[80%]"
           />
         </div>
-        <form className="space-y-6">
+        <form className="space-y-2 lg:space-y-6">
           <div>
             <label htmlFor="name" className="text-sm">
               Full name
